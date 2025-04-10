@@ -10,15 +10,16 @@ import(
 	"github.com/PhucNguyen0304/go-bookstore/pkg/models"
 )
 
-var NewBook models.Book
+var NewBook *models.Book
 
 func GetBook(w http.ResponseWriter, r *http.Request){
 	newBooks:= models.GetAllBooks()
 	res,_ := json.Marshal(newBooks)
-	w.Header().Set("Content-Type","pkglicatino/json")
+	w.Header().Set("Content-Type","application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
 }
+
 
 func GetBookById(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
@@ -29,7 +30,7 @@ func GetBookById(w http.ResponseWriter, r *http.Request) {
 	}
 	bookDetails, _ := models.GetBookById(ID)
 	res, _:= json.Marshal(bookDetails)
-	w.Header().Set("Content-Type","pkglication/json")
+	w.Header().Set("Content-Type","application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
 }
@@ -41,7 +42,7 @@ func CreateBook(w http.ResponseWriter, r *http.Request) {
 	res,_:=json.Marshal(b)
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
-}
+}	
 
 func DeleteBook(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
